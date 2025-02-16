@@ -22,11 +22,13 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
     _tabController.dispose(); // Dispose of the controller when the widget is destroyed
     super.dispose();
   }
+  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -49,7 +51,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Find products',
-                          hintStyle: GoogleFonts.roboto(color: Colors.grey),
+                          hintStyle: GoogleFonts.lato(color: Colors.grey),
                           border: InputBorder.none,
                         ),
                       ),
@@ -69,19 +71,19 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                 tabs: const [
                   Tab(
                     child: Text(
-                      'Women',
+                      'WOMEN',
                       style: TextStyle(fontSize: 10), // Make the font size smaller
                     ),
                   ),
                   Tab(
                     child: Text(
-                      'Kid',
+                      'MAN',
                       style: TextStyle(fontSize: 10), // Make the font size smaller
                     ),
                   ),
                   Tab(
                     child: Text(
-                      'Man',
+                      'KIDS',
                       style: TextStyle(fontSize: 10), // Make the font size smaller
                     ),
                   ),
@@ -110,7 +112,7 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                     height: 40,
                     fit: BoxFit.cover,
                   ),
-                  title: const Text('Shoes'),
+                  title: const Text('SHOES'),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   onTap: () {
                     // Handle tap action
@@ -125,12 +127,12 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                 ),
                 child: ListTile(
                   leading: Image.asset(
-                    'assets/icons/shoes.png', // Replace with the correct asset path
+                    'assets/icons/polo-shirt.png', // Replace with the correct asset path
                     width: 40,
                     height: 40,
                     fit: BoxFit.cover,
                   ),
-                  title: const Text('Shoes'),
+                  title: const Text('CLOTHING'),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   onTap: () {
                     // Handle tap action
@@ -145,16 +147,31 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                 ),
                 child: ListTile(
                   leading: Image.asset(
-                    'assets/icons/shoes.png', // Replace with the correct asset path
+                    'assets/icons/hat.png', // Replace with the correct asset path
                     width: 40,
                     height: 40,
                     fit: BoxFit.cover,
                   ),
-                  title: const Text('Shoes'),
+                  title: const Text('ACCESSORIES'),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   onTap: () {
                     // Handle tap action
                   },
+                ),
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 2.5,
+                  children: [
+                    _buildCategoryTile(Icons.percent, "SALE"),
+                    _buildCategoryTile(Icons.sports, "SPORT"),
+                    _buildCategoryTile(Icons.local_fire_department, "NEW AND TRENDING"),
+                    _buildCategoryTile(Icons.card_giftcard, "GIFT CARDS"),
+                  ],
                 ),
               ),
             ],
@@ -164,3 +181,20 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
     );
   }
 }
+
+Widget _buildCategoryTile(IconData icon, String title) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 30, color: Colors.black),
+          const SizedBox(height: 5),
+          Text(title, style: GoogleFonts.lato(fontSize: 12, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
